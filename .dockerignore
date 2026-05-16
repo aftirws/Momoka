@@ -1,0 +1,7 @@
+bin/
+obj/
+.gitignore
+.git
+LICENSE
+README.md
+Dockerfile
