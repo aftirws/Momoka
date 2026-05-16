@@ -3,6 +3,8 @@
 using NetCord.Gateway;
 using NetCord.Hosting.Gateway;
 
+using Momoka.Bot.Handlers;
+
 var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services
