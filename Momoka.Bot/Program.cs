@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Hosting;
 
+using NetCord;
 using NetCord.Gateway;
 using NetCord.Hosting.Gateway;
-
-using Momoka.Bot.Handlers;
+using NetCord.Services;
+using NetCord.Services.ApplicationCommands;
+using NetCord.Rest;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -12,7 +14,7 @@ builder.Services
     {
         options.Intents = GatewayIntents.GuildMessages | GatewayIntents.DirectMessages | GatewayIntents.MessageContent;
     })
-    .AddGatewayHandlers(typeof(Program).Assembly);
+    .AddApplicationCommands();
 
 var host = builder.Build();
 
