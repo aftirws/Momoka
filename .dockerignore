@@ -1,7 +1,8 @@
-bin/
-obj/
-.gitignore
-.git
-LICENSE
-README.md
-Dockerfile
+**/bin/
+**/obj/
+**/.gitignore
+**/.git
+**/LICENSE
+**/README.md
+**/Dockerfile
+**/compose.yaml
