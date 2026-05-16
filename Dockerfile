@@ -8,5 +8,5 @@ RUN dotnet publish -c Release -o /app
 FROM dhi.io/dotnet:10
 WORKDIR /app
 COPY --from=build /app .
-COPY --from=build /appsettings.json .
+COPY --from=build /src/appsettings.json .
 ENTRYPOINT ["dotnet", "Momoka.Bot.dll"]
