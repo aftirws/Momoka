@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-using NetCord;
 using NetCord.Gateway;
 using NetCord.Hosting.Gateway;
-using NetCord.Services;
-using NetCord.Services.ApplicationCommands;
-using NetCord.Rest;
+using NetCord.Hosting.Services;
+using NetCord.Hosting.Services.ApplicationCommands;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -14,8 +12,11 @@ builder.Services
     {
         options.Intents = GatewayIntents.GuildMessages | GatewayIntents.DirectMessages | GatewayIntents.MessageContent;
     })
+    .AddGatewayHandlers(typeof(Program).Assembly)
     .AddApplicationCommands();
 
 var host = builder.Build();
+
+host.AddModules(typeof(Program).Assembly);
 
 await host.RunAsync();
