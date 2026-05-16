@@ -1,3 +1,3 @@
-# Momoka - a simple Discord Bot
+# Momoka - a simple Discord bot
 
 Made for learning purposes
