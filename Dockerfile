@@ -1,8 +1,8 @@
 FROM dhi.io/dotnet:10-sdk AS build
 WORKDIR /src
-COPY *.csproj .
+COPY Momoka.Bot/*.csproj .
 RUN dotnet restore
-COPY . .
+COPY Momoka.Bot/* .
 RUN dotnet publish -c Release -o /app
 
 FROM dhi.io/dotnet:10
