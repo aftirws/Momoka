@@ -26,10 +26,17 @@ public class DbCommands(FoxesContext dbContext)
 
         foxes = await foxesQuery.ToListAsync();
 
+        string embedContents = "";
+
+        foreach (Fox f in foxes)
+        {
+            embedContents += $"`{f.Id}: {f.Name}, age {f.Age}`\n";
+        }
+
         return new InteractionMessageProperties().WithEmbeds([
             new EmbedProperties {
                 Title = "Database Response",
-                Description = string.Join("", foxes.Select(fox => fox.Name))
+                Description = embedContents
             }
         ]);
     }
@@ -39,10 +46,17 @@ public class DbCommands(FoxesContext dbContext)
     {
         List<Species> species = await dbContext.Species.AsNoTracking().ToListAsync();
 
+        string embedContents = "";
+
+        foreach (Species s in species)
+        {
+            embedContents += $"`{s.Id}: {s.Name}`\n";
+        }
+
         return new InteractionMessageProperties().WithEmbeds([
             new EmbedProperties {
                 Title = "Database Response",
-                Description = string.Join("", species.Select(species => species.Name))
+                Description = embedContents
             }
         ]);
     }

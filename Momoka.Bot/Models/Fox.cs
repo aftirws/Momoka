@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Momoka.Bot.Models;
 
-[Table("user_account")]
+[Table("fox")]
 public class Fox
 {
     [Key]
@@ -15,6 +15,7 @@ public class Fox
     public required string Name { get; set; }
 
     [ForeignKey("species")]
+    [Column("species_id")]
     public int SpeciesId { get; set ;}
     [Column("species")]
     public Species? Species { get; set; }

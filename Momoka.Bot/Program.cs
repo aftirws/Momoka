@@ -19,21 +19,7 @@ builder.Services
     })
     .AddGatewayHandlers(typeof(Program).Assembly)
     .AddApplicationCommands()
-    .AddDbContext<FoxesContext>(
-        optionsAction: options => options.UseSeeding((context, _) =>
-        {
-            if (!context.Set<Species>().Any())
-            {
-                context.Set<Species>().AddRange(
-                    new Species { Name = "Red" },
-                    new Species { Name = "Arctic" },
-                    new Species { Name = "Fennec" }
-                );
-
-                context.SaveChanges();
-            }
-        })
-    );
+    .AddDbContext<FoxesContext>();
 
 var host = builder.Build();
 
