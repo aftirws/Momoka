@@ -9,7 +9,7 @@ public class MessageCreateHandler(ILogger<MessageCreateHandler> logger) : IMessa
 {
     public ValueTask HandleAsync(Message message)
     {
-        logger.LogInformation("[{}]: {}", message.Author.GlobalName, message.Content);
+        logger.LogInformation("[{}]: {}", message.Author.Username, message.Content);
         return default;
     }
 }

@@ -8,9 +8,7 @@ public class Species
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("species_id")]
     public int Id { get; set; }
 
-    [Column("name")]
     public required string Name { get; set; }
 }

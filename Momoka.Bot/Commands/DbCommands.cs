@@ -26,19 +26,14 @@ public class DbCommands(FoxesContext dbContext)
 
         foxes = await foxesQuery.ToListAsync();
 
-        string embedContents = "";
+        string formattedResponse = "";
 
         foreach (Fox f in foxes)
         {
-            embedContents += $"`{f.Id}: {f.Name}, age {f.Age}`\n";
+            formattedResponse += $"`{f.Id}: {f.Name}, {f.Species!.Name} fox, age {f.Age}`\n";
         }
 
-        return new InteractionMessageProperties().WithEmbeds([
-            new EmbedProperties {
-                Title = "Database Response",
-                Description = embedContents
-            }
-        ]);
+        return BuildDbResponseFormat(formattedResponse);
     }
 
     [SlashCommand("get_species", "Returns species records")]
@@ -46,18 +41,24 @@ public class DbCommands(FoxesContext dbContext)
     {
         List<Species> species = await dbContext.Species.AsNoTracking().ToListAsync();
 
-        string embedContents = "";
+        string formattedResponse = "";
 
         foreach (Species s in species)
         {
-            embedContents += $"`{s.Id}: {s.Name}`\n";
+            formattedResponse += $"`{s.Id}: {s.Name}`\n";
         }
 
-        return new InteractionMessageProperties().WithEmbeds([
-            new EmbedProperties {
-                Title = "Database Response",
-                Description = embedContents
-            }
-        ]);
+        return BuildDbResponseFormat(formattedResponse);
+    }
+
+    private InteractionMessageProperties BuildDbResponseFormat(string formattedResponse)
+    {
+        return new InteractionMessageProperties()
+            .WithContent("**Database Response**")
+            .WithEmbeds([
+                new EmbedProperties {
+                    Description = formattedResponse
+                }
+            ]);
     }
 }

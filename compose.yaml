@@ -1,10 +1,9 @@
 services:
   bot:
     build: .
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/mydb
     depends_on:
-      - database
+      database:
+        condition: service_healthy
   
   database:
     image: postgres:18
@@ -16,6 +15,12 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
+      - ./pg_hba.dev.conf:/etc/pg_hba.conf
+    command: -c hba_file=/etc/pg_hba.conf
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - 'pg_isready -U postgres'
 
 volumes:
   postgres_data:
